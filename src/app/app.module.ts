@@ -19,6 +19,8 @@ import {WebviewDirective} from './directives/webview.directive';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './components/home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatMenuModule} from '@angular/material';
+import {QuizGroupService} from './services/quiz-group.service';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -29,7 +31,6 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     HomeComponent,
-    WebviewDirective
   ],
   imports: [
     BrowserModule,
@@ -44,8 +45,18 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     BrowserAnimationsModule,
+
+    // Angular Material Design
+    MatMenuModule,
+    MatButtonModule,
+    MatIconModule,
+    MatGridListModule,
+    MatCardModule,
   ],
-  providers: [ElectronService],
+  providers: [
+    ElectronService,
+    QuizGroupService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
