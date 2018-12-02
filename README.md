@@ -7,7 +7,7 @@ This project is based on [Angular Electron][angular-electron].
 Clone this repository locally :
 
 ``` bash
-git clone https://github.com/maximegris/angular-electron.git
+git clone https://github.com/jpnauta/wedding-quiz-game
 ```
 
 Install dependencies with npm :
