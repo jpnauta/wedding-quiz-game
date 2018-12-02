@@ -10,6 +10,9 @@
 }
 
 .tables {
+  .table {
+    cursor: pointer;
+  }
   .title {
     display: block;
     font-size: 3em;
@@ -22,13 +25,5 @@
     font-size: 2em;
     margin: 0;
     text-align: center;
-  }
-
-  mat-grid-tile-footer {
-    background: none;
-    text-align: right;
-    display: block;
-    height: auto;
-    padding: $spacer * 2;
   }
 }

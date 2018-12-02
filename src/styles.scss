@@ -1,8 +1,17 @@
 @import "./theme";
 
-html, body {
+html {
   margin: 0;
-  height: 100%;
+  padding: 0;
+  height: 100vh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  // For some reason 100vh adds a scroll bar, so this will work for now...
+  height: 98vh;
 }
 
 body {

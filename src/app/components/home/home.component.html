@@ -8,13 +8,12 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item>Item 1</button>
-    <button mat-menu-item>Item 2</button>
+    <button mat-menu-item (click)="reset()">Reset</button>
   </mat-menu>
 </div>
 
 <mat-grid-list class="tables" [cols]="numColumns" rowHeight="1:1">
-  <mat-grid-tile *ngFor="let group of groups" [style.background]="group.color"
+  <mat-grid-tile class="table" *ngFor="let group of groups" [style.background]="group.color"
                  (click)="onLeftClick(group)" (contextmenu)="onRightClick(group)">
     <div class="content">
       <h3 class="title">
@@ -24,8 +23,5 @@
         {{group.score}}
       </div>
     </div>
-    <mat-grid-tile-footer>
-      TEST
-    </mat-grid-tile-footer>
   </mat-grid-tile>
 </mat-grid-list>

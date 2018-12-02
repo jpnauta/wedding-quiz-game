@@ -10,16 +10,14 @@ export class QuizGroupService {
   groupsSubject = new BehaviorSubject<QuizGroupModel[]>(null);
 
   private groups: QuizGroupModel[];
+  private numPointsToWin: number;
+  private numPointsPerClick: number;
 
   constructor() {
-    this.groupsSubject.subscribe((groups) => {
-      this.groups = groups;
-      if (this.groups) {
-        this.groups.map((group) => {
-          group.color = 'rgb(256, 0, 0, .2)';
-        });
-      }
-    });
+    // Sync values
+    this.groupsSubject.subscribe((next) => this.groups = next);
+    this.numPointsToWinSubject.subscribe((next) => this.numPointsToWin = next);
+    this.numPointsPerClickSubject.subscribe((next) => this.numPointsPerClick = next);
   }
 
   initialize() {
@@ -58,12 +56,12 @@ export class QuizGroupService {
   }
 
   addPoints(group: QuizGroupModel) {
-    group.score += this.numPointsPerClickSubject.getValue();
+    group.score = Math.min(group.score + this.numPointsPerClick, this.numPointsToWin);
     this.onQuizGroupChanged();
   }
 
   subtractPoints(group: QuizGroupModel) {
-    group.score -= this.numPointsPerClickSubject.getValue();
+    group.score = Math.max(group.score - this.numPointsPerClick, 0);
     this.onQuizGroupChanged();
   }
 
