@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {QuizGroupService} from '../../services/quiz-group.service';
 import {QuizGroupModel} from '../../models/quiz-group-model';
+import {MatDialog} from '@angular/material';
+import {SettingsDialogComponent} from './settings-dialog/settings-dialog.component';
+import {GroupsDialogComponent} from './groups-dialog/groups-dialog.component';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +19,7 @@ export class HomeComponent implements OnInit {
   minGroupColorOpacity = 0.1;
   maxGroupColorOpacity = 0.5;
 
-  constructor(private quizGroupService: QuizGroupService) {
+  constructor(private quizGroupService: QuizGroupService, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -52,6 +55,20 @@ export class HomeComponent implements OnInit {
 
   reset() {
     this.quizGroupService.initialize();
+  }
+
+  openSettings(): void {
+    const dialogRef = this.dialog.open(SettingsDialogComponent, {});
+
+    dialogRef.afterClosed().subscribe();
+  }
+
+  openEditGroups(): void {
+    const dialogRef = this.dialog.open(GroupsDialogComponent, {
+      height: '500px',
+    });
+
+    dialogRef.afterClosed().subscribe();
   }
 
   onLeftClick(group: QuizGroupModel) {

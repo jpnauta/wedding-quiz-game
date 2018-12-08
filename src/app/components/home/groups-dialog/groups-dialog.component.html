@@ -1,0 +1,21 @@
+<form [formGroup]="form">
+  <div md-dialog-content>
+    <div formArrayName="groups" *ngFor="let group of form.controls.groups.controls; let i = index">
+      <mat-form-field>
+        <input matInput type="text" [(ngModel)]="model.groups[i].name" z [formControlName]="i" placeholder="name">
+        <button mat-button matSuffix (click)="removeGroup(model.groups[i])">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+    <button mat-button (click)="appendGroup()">
+      <mat-icon>add</mat-icon>
+      Add Group
+    </button>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-raised-button color="primary" (click)="close()">
+      Done
+    </button>
+  </div>
+</form>

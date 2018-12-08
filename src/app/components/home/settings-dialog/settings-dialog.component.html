@@ -1,0 +1,30 @@
+<form [formGroup]="form" (submit)="save()">
+  <div md-dialog-content>
+    <div>
+      <mat-form-field>
+        <input matInput type="number" placeholder="# columns" formControlName="numColumns"
+               [(ngModel)]="model.numColumns">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput type="number" placeholder="# points to win" formControlName="numPointsToWin"
+               [(ngModel)]="model.numPointsToWin">
+      </mat-form-field>
+    </div>
+    <div>
+      <mat-form-field>
+        <input matInput type="number" placeholder="# points per click" formControlName="numPointsPerClick"
+               [(ngModel)]="model.numPointsPerClick">
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="cancel()">
+      Cancel
+    </button>
+    <button mat-button mat-raised-button color="primary" type="submit">
+      Save
+    </button>
+  </div>
+</form>

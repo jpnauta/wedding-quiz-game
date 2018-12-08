@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {QuizGroupModel} from '../models/quiz-group-model';
+import {ConfigService} from './config.service';
 
 @Injectable()
 export class QuizGroupService {
@@ -13,46 +14,21 @@ export class QuizGroupService {
   private numPointsToWin: number;
   private numPointsPerClick: number;
 
-  constructor() {
+  constructor(private configService: ConfigService) {
     // Sync values
+    this.configService.configSubject.subscribe((next) => {
+      this.numColumnsSubject.next(next && next.numColumns);
+      this.numPointsPerClickSubject.next(next && next.numPointsPerClick);
+      this.numPointsToWinSubject.next(next && next.numPointsToWin);
+      this.groupsSubject.next(next && next.groups);
+    });
     this.groupsSubject.subscribe((next) => this.groups = next);
     this.numPointsToWinSubject.subscribe((next) => this.numPointsToWin = next);
     this.numPointsPerClickSubject.subscribe((next) => this.numPointsPerClick = next);
   }
 
   initialize() {
-    this.numColumnsSubject.next(7);
-    this.numPointsPerClickSubject.next(10);
-    this.numPointsToWinSubject.next(100);
-    this.groupsSubject.next([
-      {name: 'Table 1', score: 0},
-      {name: 'Table 2', score: 0},
-      {name: 'Table 3', score: 0},
-      {name: 'Table 4', score: 0},
-      {name: 'Table 5', score: 0},
-      {name: 'Table 6', score: 0},
-      {name: 'Table 7', score: 0},
-      {name: 'Table 8', score: 0},
-      {name: 'Table 9', score: 0},
-      {name: 'Table 10', score: 0},
-      {name: 'Table 11', score: 0},
-      {name: 'Table 12', score: 0},
-      {name: 'Table 13', score: 0},
-      {name: 'Table 14', score: 0},
-      {name: 'Table 15', score: 0},
-      {name: 'Table 16', score: 0},
-      {name: 'Table 17', score: 0},
-      {name: 'Table 18', score: 0},
-      {name: 'Table 19', score: 0},
-      {name: 'Table 20', score: 0},
-      {name: 'Table 21', score: 0},
-      {name: 'Table 23', score: 0},
-      {name: 'Table 24', score: 0},
-      {name: 'Table 25', score: 0},
-      {name: 'Table 26', score: 0},
-      {name: 'Table 27', score: 0},
-      {name: 'Table 28', score: 0},
-    ]);
+    this.configService.initialize();
   }
 
   addPoints(group: QuizGroupModel) {
@@ -66,6 +42,6 @@ export class QuizGroupService {
   }
 
   private onQuizGroupChanged() {
-    this.groupsSubject.next(this.groupsSubject.getValue());
+    this.configService.onConfigChanged();
   }
 }

@@ -2,7 +2,7 @@ import 'reflect-metadata';
 import '../polyfills';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 
@@ -19,8 +19,18 @@ import {WebviewDirective} from './directives/webview.directive';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './components/home/home.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatButtonModule, MatCardModule, MatGridListModule, MatIconModule, MatMenuModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatGridListModule,
+  MatIconModule, MatInputModule,
+  MatMenuModule
+} from '@angular/material';
 import {QuizGroupService} from './services/quiz-group.service';
+import {SettingsDialogComponent} from './components/home/settings-dialog/settings-dialog.component';
+import { GroupsDialogComponent } from './components/home/groups-dialog/groups-dialog.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -32,6 +42,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     AppComponent,
     HomeComponent,
     WebviewDirective,
+    SettingsDialogComponent,
+    GroupsDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +65,14 @@ export function HttpLoaderFactory(http: HttpClient) {
     MatIconModule,
     MatGridListModule,
     MatCardModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    ReactiveFormsModule
+  ],
+  entryComponents: [
+    SettingsDialogComponent,
+    GroupsDialogComponent
   ],
   providers: [
     ElectronService,
