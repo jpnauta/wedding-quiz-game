@@ -16,8 +16,15 @@ export class HomeComponent implements OnInit {
   numPointsToWin: number;
   groups: QuizGroupModel[];
 
-  minGroupColorOpacity = 0.1;
+  minGroupColorOpacity = 0.25;
   maxGroupColorOpacity = 0.5;
+
+  rgbValues = [
+    [133, 106, 126],  // Old lavender
+    [125, 132, 178],  // Shadow blue
+    [171, 195, 234],  // Pale cornflower blue
+    [160, 166, 165],  // Quick silver
+  ];
 
   constructor(private quizGroupService: QuizGroupService, private dialog: MatDialog) {
   }
@@ -34,17 +41,19 @@ export class HomeComponent implements OnInit {
     this.quizGroupService.groupsSubject.subscribe((groups) => {
       this.groups = groups;
       if (this.groups) {
-        this.groups.map((group) => {
-          let color;
+        this.groups.map((group, index) => {
+          let rgba;
           if (group.score >= this.numPointsToWin) {
-            color = `#659E80`;
+            rgba = `#659E80`;
           } else {
+            const rgb = this.rgbValues[index % this.rgbValues.length];
             const opacity = Math.max(
               (group.score / this.numPointsToWin * (this.maxGroupColorOpacity - this.minGroupColorOpacity)) + this.minGroupColorOpacity,
               this.minGroupColorOpacity);
-            color = `rgb(136, 106, 126, ${opacity.toFixed(2)})`;
+            rgba = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${opacity.toFixed(2)})`;
+            console.log(rgba);
           }
-          group.color = color;
+          group.color = rgba;
         });
       }
     });
