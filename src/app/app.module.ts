@@ -3,12 +3,12 @@ import '../polyfills';
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {WebStorageModule} from 'ngx-store';
 
 import {HttpClientModule, HttpClient} from '@angular/common/http';
 
 import {AppRoutingModule} from './app-routing.module';
 
-// NG Translate
 import {TranslateModule, TranslateLoader} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
@@ -30,7 +30,7 @@ import {
 } from '@angular/material';
 import {QuizGroupService} from './services/quiz-group.service';
 import {SettingsDialogComponent} from './components/home/settings-dialog/settings-dialog.component';
-import { GroupsDialogComponent } from './components/home/groups-dialog/groups-dialog.component';
+import {GroupsDialogComponent} from './components/home/groups-dialog/groups-dialog.component';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -58,6 +58,7 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     }),
     BrowserAnimationsModule,
+    WebStorageModule,
 
     // Angular Material Design
     MatMenuModule,

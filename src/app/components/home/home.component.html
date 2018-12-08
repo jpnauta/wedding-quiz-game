@@ -8,14 +8,17 @@
     <mat-icon>more_vert</mat-icon>
   </button>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="reset()">
-      Reset
-    </button>
     <button mat-menu-item (click)="openSettings()">
       Settings
     </button>
     <button mat-menu-item (click)="openEditGroups()">
       Edit Groups
+    </button>
+    <button mat-menu-item (click)="resetScores()">
+      Reset Scores
+    </button>
+    <button mat-menu-item (click)="resetAll()">
+      Reset All
     </button>
   </mat-menu>
 </div>

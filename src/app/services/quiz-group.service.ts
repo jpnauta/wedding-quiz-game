@@ -31,6 +31,10 @@ export class QuizGroupService {
     this.configService.initialize();
   }
 
+  reset() {
+    this.configService.reset();
+  }
+
   addPoints(group: QuizGroupModel) {
     group.score = Math.min(group.score + this.numPointsPerClick, this.numPointsToWin);
     this.onQuizGroupChanged();
@@ -43,5 +47,9 @@ export class QuizGroupService {
 
   private onQuizGroupChanged() {
     this.configService.onConfigChanged();
+  }
+
+  resetScores() {
+    this.configService.resetScores();
   }
 }

@@ -53,8 +53,12 @@ export class HomeComponent implements OnInit {
     this.quizGroupService.initialize();
   }
 
-  reset() {
-    this.quizGroupService.initialize();
+  resetScores() {
+    this.quizGroupService.resetScores();
+  }
+
+  resetAll() {
+    this.quizGroupService.reset();
   }
 
   openSettings(): void {
