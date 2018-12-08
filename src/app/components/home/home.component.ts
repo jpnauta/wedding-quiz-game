@@ -51,7 +51,6 @@ export class HomeComponent implements OnInit {
               (group.score / this.numPointsToWin * (this.maxGroupColorOpacity - this.minGroupColorOpacity)) + this.minGroupColorOpacity,
               this.minGroupColorOpacity);
             rgba = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${opacity.toFixed(2)})`;
-            console.log(rgba);
           }
           group.color = rgba;
         });

@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import {ConfigService} from '../../../services/config.service';
 import {FormService} from '../../../services/form.service';
 import {ConfigModel} from '../../../models/config-model';
@@ -49,5 +49,9 @@ export class GroupsDialogComponent implements OnInit {
 
   appendGroup() {
     this.configService.appendGroup();
+  }
+
+  get groupForms(): FormArray {
+    return <FormArray> this.form.get('groups');
   }
 }
