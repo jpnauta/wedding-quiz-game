@@ -41,7 +41,7 @@ export class QuizGroupService {
   }
 
   subtractPoints(group: QuizGroupModel) {
-    group.score = Math.max(group.score - this.numPointsPerClick, 0);
+    group.score = group.score - this.numPointsPerClick;
     this.onQuizGroupChanged();
   }
 
