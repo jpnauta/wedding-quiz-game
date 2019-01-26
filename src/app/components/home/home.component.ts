@@ -83,11 +83,11 @@ export class HomeComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  onLeftClick(group: QuizGroupModel) {
-    this.quizGroupService.addPoints(group);
-  }
-
-  onRightClick(group: QuizGroupModel) {
-    this.quizGroupService.subtractPoints(group);
+  onLeftClick(event: MouseEvent, group: QuizGroupModel) {
+    if (event.ctrlKey || event.metaKey) {  // CTRL + click on Windows, CMD + click on Mac
+      this.quizGroupService.subtractPoints(group);
+    } else {
+      this.quizGroupService.addPoints(group);
+    }
   }
 }

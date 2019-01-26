@@ -25,7 +25,7 @@
 
 <mat-grid-list class="tables" [cols]="numColumns" rowHeight="1:1">
   <mat-grid-tile class="table" *ngFor="let group of groups" [style.background]="group.color"
-                 (click)="onLeftClick(group)" (contextmenu)="onRightClick(group)">
+                 (click)="onLeftClick($event, group)">
     <div class="content">
       <h3 class="title">
         {{group.name}}
