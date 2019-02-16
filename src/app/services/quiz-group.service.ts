@@ -45,6 +45,11 @@ export class QuizGroupService {
     this.onQuizGroupChanged();
   }
 
+  toggleServedStatus(group: QuizGroupModel) {
+    group.waitingToEat = !group.waitingToEat;
+    this.onQuizGroupChanged();
+  }
+
   private onQuizGroupChanged() {
     this.configService.onConfigChanged();
   }

@@ -77,7 +77,8 @@ export class ConfigService {
   appendGroup() {
     this.config.groups.push({
       name: 'Table ' + (this.config.groups.length + 1),
-      score: 0
+      score: 0,
+      waitingToEat: true
     });
     this.onConfigChanged();
   }
@@ -87,6 +88,7 @@ export class ConfigService {
    */
   resetScores() {
     this.config.groups.forEach((group) => group.score = 0);
+    this.config.groups.forEach((group) => group.waitingToEat = true);
     this.onConfigChanged();
   }
 }

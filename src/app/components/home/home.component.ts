@@ -17,7 +17,7 @@ export class HomeComponent implements OnInit {
   groups: QuizGroupModel[];
 
   minGroupColorOpacity = 0.25;
-  maxGroupColorOpacity = 0.5;
+  maxGroupColorOpacity = 0.75;
 
   rgbValues = [
     [133, 106, 126],  // Old lavender
@@ -38,17 +38,31 @@ export class HomeComponent implements OnInit {
 
 
     // Calculate derived properties
+	let maxPoints: number = 0;
+    this.quizGroupService.groupsSubject.subscribe((groups) => {
+      this.groups = groups;
+	  maxPoints = 0;
+      if (this.groups) {
+        this.groups.map((group, index) => {
+          if (group.waitingToEat) {
+            maxPoints = Math.max(group.score, maxPoints);
+          }
+        });
+      }
+    });
     this.quizGroupService.groupsSubject.subscribe((groups) => {
       this.groups = groups;
       if (this.groups) {
         this.groups.map((group, index) => {
           let rgba;
-          if (group.score >= this.numPointsToWin) {
+          if (!group.waitingToEat) {
             rgba = `#659E80`;
+          } else if (group.score == maxPoints) {
+            rgba = `#ff9933`;
           } else {
             const rgb = this.rgbValues[index % this.rgbValues.length];
             const opacity = Math.max(
-              (group.score / this.numPointsToWin * (this.maxGroupColorOpacity - this.minGroupColorOpacity)) + this.minGroupColorOpacity,
+              (group.score / maxPoints * (this.maxGroupColorOpacity - this.minGroupColorOpacity)) + this.minGroupColorOpacity,
               this.minGroupColorOpacity);
             rgba = `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]}, ${opacity.toFixed(2)})`;
           }
@@ -86,6 +100,8 @@ export class HomeComponent implements OnInit {
   onLeftClick(event: MouseEvent, group: QuizGroupModel) {
     if (event.ctrlKey || event.metaKey) {  // CTRL + click on Windows, CMD + click on Mac
       this.quizGroupService.subtractPoints(group);
+    } else if (event.altKey) {
+      this.quizGroupService.toggleServedStatus(group);
     } else {
       this.quizGroupService.addPoints(group);
     }
